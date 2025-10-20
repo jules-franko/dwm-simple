@@ -2,19 +2,20 @@
 #include "X11/XF86keysym.h"
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 //static const char *fonts[]          = { "Ubuntu Mono:size=13" };
-static const char *fonts[]          = { "xos4 terminus:size=12" };
+static const char *fonts[]          = { "monospace:size=11" };
+//static const char *fonts[]          = { "xos4 terminus:size=12" };
 //static const char dmenufont[]       = "Ubuntu Mono:size=13";
-static const char dmenufont[]       = "xos4 terminus:size=12";
+static const char dmenufont[]       = "monospace:size=11";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#772414";
+static const char col_cyan[]        = "#005577"; //#f23f1e
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -68,7 +69,6 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_a,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_e, 	   spawn,          SHCMD("st -e ranger") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -101,6 +101,12 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
+	{ MODKEY,                       XK_e, 	   spawn,          SHCMD("st -e ranger") },
+	{ MODKEY,                       XK_z, 	   spawn,          SHCMD("thunar") },
+	{ MODKEY,                       XK_F1,     spawn,          SHCMD("st -e vim $HOME/.local/src/dwm/config.h") },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("~/.local/bin/screenshotsel") },
+	{ MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("~/.local/bin/switchoutput") },
+	{ 0,                            XK_Print,  spawn,          SHCMD("scrot") },
 	{ 0,                            XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%; kill -44 $(pidof dwmblocks)") },
 	{ 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%; kill -44 $(pidof dwmblocks)") },
 
