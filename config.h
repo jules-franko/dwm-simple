@@ -12,15 +12,22 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 //static const char *fonts[]          = { "Ubuntu Mono:size=13" };
-static const char *fonts[]          = { "monospace:size=11" };
+static const char *fonts[]          = { "xos4 terminus:size=11" };
 //static const char *fonts[]          = { "xos4 terminus:size=12" };
 //static const char dmenufont[]       = "Ubuntu Mono:size=13";
-static const char dmenufont[]       = "monospace:size=11";
+static const char dmenufont[]       = "xos4 terminus:size=11";
+//static const char col_gray1[]       = "#222222";
+//static const char col_gray2[]       = "#444444";
+//static const char col_gray3[]       = "#bbbbbb";
+//static const char col_gray4[]       = "#eeeeee";
+//static const char col_cyan[]        = "#005577"; //#f23f1e
+						 //
+//Monokai
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577"; //#f23f1e
+static const char col_cyan[]        = "#a6e22e";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -45,7 +52,7 @@ static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
-static const int refreshrate = 165;  /* refresh rate (per second) for client move/resize */
+static const int refreshrate = 60;  /* refresh rate (per second) for client move/resize */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -68,7 +75,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -106,14 +113,16 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
-	{ MODKEY,                       XK_e, 	   spawn,          SHCMD("st -e ranger") },
+	{ MODKEY,                       XK_e, 	   spawn,          SHCMD("alacritty -e ranger") },
 	{ MODKEY,                       XK_z, 	   spawn,          SHCMD("thunar") },
-	{ MODKEY,                       XK_F1,     spawn,          SHCMD("st -e vim $HOME/.local/src/dwm/config.h") },
+	{ MODKEY,                       XK_F1,     spawn,          SHCMD("alacritty -e vim $HOME/.local/src/dwm/config.h") },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("~/.local/bin/screenshotsel") },
 	{ MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("~/.local/bin/switchoutput") },
 	{ 0,                            XK_Print,  spawn,          SHCMD("scrot") },
 	{ 0,                            XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%; kill -44 $(pidof dwmblocks)") },
 	{ 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%; kill -44 $(pidof dwmblocks)") },
+		{ 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD( "xbacklight +2") },
+	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD( "xbacklight -2") },
 	//{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
 	//{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
 	//{ MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
